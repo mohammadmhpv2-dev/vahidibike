@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>داشبورد فنی دستیار هوشمند وحیدی‌بایک</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Vazirmatn Font -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Vazirmatn', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        },
+                        accent: {
+                            500: '#10b981', // Emerald for success
+                            600: '#059669',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #f3f4f6;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            height: 300px;
+        }
+        .step-card {
+            transition: all 0.3s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        /* Custom Scrollbar for sleek look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <!-- Chosen Palette: Slate (Background), Blue (Primary), Emerald (Success/Accent) -->
+    <!-- Application Structure Plan: Dashboard layout. Top stats for impact. Middle section for the core logic (Algorithm Details) to visualize the branching logic. Bottom for connectivity status and charts. -->
+    
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-brand-600 text-white rounded-xl flex items-center justify-center text-xl font-bold">V</div>
+                    <div>
+                        <h1 class="font-bold text-lg text-slate-800 leading-tight">دستیار هوشمند وحیدی‌بایک</h1>
+                        <p class="text-xs text-slate-500">نسخه سیستم: ۵.۰ (پایدار)</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-reverse space-x-4">
+                    <button onclick="scrollToSection('overview')" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition">نمای کلی</button>
+                    <button onclick="scrollToSection('workflow')" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition">جریان کار</button>
+                    <button onclick="scrollToSection('logic')" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition">منطق الگوریتم</button>
+                    <button onclick="scrollToSection('connectivity')" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition">وضعیت شبکه</button>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-brand-600 focus:outline-none">
+                        <span class="text-2xl">☰</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 p-4 space-y-2">
+            <button onclick="scrollToSection('overview')" class="block w-full text-right px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:bg-brand-50">نمای کلی</button>
+            <button onclick="scrollToSection('workflow')" class="block w-full text-right px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:bg-brand-50">جریان کار</button>
+            <button onclick="scrollToSection('logic')" class="block w-full text-right px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:bg-brand-50">منطق الگوریتم</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- 1. Overview Section -->
+        <section id="overview" class="animate-fade-in">
+            <div class="bg-brand-900 rounded-3xl p-8 text-white shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+                    <!-- Abstract Background Pattern using CSS -->
+                    <div class="absolute right-10 top-10 w-64 h-64 bg-white rounded-full mix-blend-overlay filter blur-3xl"></div>
+                    <div class="absolute left-10 bottom-10 w-48 h-48 bg-brand-500 rounded-full mix-blend-overlay filter blur-2xl"></div>
+                </div>
+                
+                <div class="relative z-10">
+                    <h2 class="text-3xl font-bold mb-4">انقلاب در مدیریت محتوای فروشگاه</h2>
+                    <p class="text-brand-100 max-w-2xl text-lg mb-8 leading-relaxed">
+                        سیستم Vahidi AI-Assistant یک پلتفرم تمام‌عیار مهندسی شده است که با استفاده از هوش مصنوعی 
+                        <span class="font-bold text-white">Gemini 2.5</span> و زبان پایتون، فرآیند زمان‌بر ورود محصول را از ۳۰ دقیقه به کمتر از ۳ دقیقه کاهش داده است. این سیستم با دور زدن تحریم‌ها و اتصال مستقیم به ووکامرس، مدیریت سایت را خودکار می‌کند.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+                            <div class="text-2xl font-bold text-emerald-400">Gemini 2.5</div>
+                            <div class="text-sm text-brand-100">مغز پردازشی</div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+                            <div class="text-2xl font-bold text-yellow-400">DNS Tunnel</div>
+                            <div class="text-sm text-brand-100">معماری ضد تحریم</div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+                            <div class="text-2xl font-bold text-white">Schema Pro</div>
+                            <div class="text-sm text-brand-100">سئوی ساختاریافته</div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+                            <div class="text-2xl font-bold text-white">WebP</div>
+                            <div class="text-sm text-brand-100">بهینه‌سازی تصویر</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Workflow Visualization (Visualization & Content Choices) -->
+        <section id="workflow">
+            <div class="flex items-center gap-2 mb-6">
+                <span class="w-1 h-8 bg-brand-600 rounded-full"></span>
+                <h2 class="text-2xl font-bold text-slate-800">چرخه حیات داده (Data Lifecycle)</h2>
+            </div>
+            <p class="text-slate-600 mb-8 max-w-3xl">
+                این بخش نشان می‌دهد چگونه داده‌ها از حالت خام در مغازه (فیزیکی) به یک محصول کامل و سئو شده در سایت (دیجیتال) تبدیل می‌شوند. برای مشاهده جزئیات روی هر کارت کلیک کنید.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
+                <!-- Connectors for Desktop -->
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-slate-200 -z-10 -translate-y-1/2 rounded-full"></div>
+
+                <!-- Step 1 -->
+                <div class="step-card bg-white p-6 rounded-2xl shadow-sm border border-slate-100 cursor-pointer hover:border-brand-300" onclick="showStepDetail(1)">
+                    <div class="w-10 h-10 bg-slate-100 text-slate-600 rounded-full flex items-center justify-center font-bold mb-4 mx-auto">۱</div>
+                    <h3 class="text-center font-bold text-slate-700">ورودی مغازه</h3>
+                    <p class="text-center text-xs text-slate-500 mt-2">عکس + اکسل + ویس</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step-card bg-white p-6 rounded-2xl shadow-sm border border-slate-100 cursor-pointer hover:border-brand-300" onclick="showStepDetail(2)">
+                    <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold mb-4 mx-auto">۲</div>
+                    <h3 class="text-center font-bold text-slate-700">تحلیل هوشمند</h3>
+                    <p class="text-center text-xs text-slate-500 mt-2">Gemini 2.5 + Whisper</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="step-card bg-white p-6 rounded-2xl shadow-sm border border-slate-100 cursor-pointer hover:border-brand-300" onclick="showStepDetail(3)">
+                    <div class="w-10 h-10 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center font-bold mb-4 mx-auto">۳</div>
+                    <h3 class="text-center font-bold text-slate-700">منطق محصول</h3>
+                    <p class="text-center text-xs text-slate-500 mt-2">ساده یا دنده‌ای؟</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="step-card bg-white p-6 rounded-2xl shadow-sm border border-slate-100 cursor-pointer hover:border-brand-300" onclick="showStepDetail(4)">
+                    <div class="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold mb-4 mx-auto">۴</div>
+                    <h3 class="text-center font-bold text-slate-700">سئو و اسکیما</h3>
+                    <p class="text-center text-xs text-slate-500 mt-2">Pros/Cons + FAQ</p>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="step-card bg-white p-6 rounded-2xl shadow-sm border border-slate-100 cursor-pointer hover:border-brand-300" onclick="showStepDetail(5)">
+                    <div class="w-10 h-10 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center font-bold mb-4 mx-auto">۵</div>
+                    <h3 class="text-center font-bold text-slate-700">تزریق به سایت</h3>
+                    <p class="text-center text-xs text-slate-500 mt-2">WooCommerce API</p>
+                </div>
+            </div>
+
+            <!-- Dynamic Detail Box -->
+            <div id="step-detail-box" class="mt-6 bg-slate-50 border-r-4 border-brand-500 p-6 rounded-lg transition-all duration-500">
+                <h4 id="detail-title" class="font-bold text-lg text-slate-800 mb-2">برای مشاهده جزئیات روی مراحل بالا کلیک کنید</h4>
+                <p id="detail-desc" class="text-slate-600">این سیستم طراحی شده تا خطای انسانی را به صفر برساند و سرعت ورود اطلاعات را ۱۰ برابر کند.</p>
+            </div>
+        </section>
+
+        <!-- 3. Core Logic & Algorithm (Based on algorithm_details.md) -->
+        <section id="logic">
+            <div class="flex items-center gap-2 mb-6">
+                <span class="w-1 h-8 bg-brand-600 rounded-full"></span>
+                <h2 class="text-2xl font-bold text-slate-800">موتور تفکیک هوشمند (Classification Logic)</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Left: Logic Controller -->
+                <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100">
+                    <p class="text-slate-600 mb-6 leading-loose">
+                        یکی از پیچیده‌ترین بخش‌های سیستم، تشخیص نوع دوچرخه است. سیستم بر اساس تحلیل عکس و کلمات کلیدی موجود در ویس (مثل "دنده"، "شیمانو" یا "تک‌سرعته")، پروفایل ویژگی‌ها را تغییر می‌دهد.
+                    </p>
+                    
+                    <div class="bg-slate-50 rounded-xl p-2 flex mb-6">
+                        <button onclick="setLogic('simple')" id="btn-simple" class="flex-1 py-3 rounded-lg text-sm font-bold transition-all bg-white text-brand-600 shadow-md">پروفایل دوچرخه ساده</button>
+                        <button onclick="setLogic('gear')" id="btn-gear" class="flex-1 py-3 rounded-lg text-sm font-bold text-slate-500 hover:text-slate-700 transition-all">پروفایل دوچرخه دنده‌ای</button>
+                    </div>
+
+                    <div id="logic-explanation" class="text-sm text-slate-700 bg-blue-50 p-4 rounded-xl border border-blue-100">
+                        در این حالت، سیستم تمام فیلدهای مربوط به دنده، شانژمان و طبق‌عوض‌کن را نادیده می‌گیرد و فقط روی ایمنی و بدنه تمرکز می‌کند.
+                    </div>
+                </div>
+
+                <!-- Right: Active Attributes Visualization -->
+                <div class="bg-slate-800 p-8 rounded-3xl text-white shadow-2xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-20 text-6xl">⚙️</div>
+                    <h3 class="font-bold text-xl mb-6 border-b border-slate-600 pb-4">ویژگی‌های فعال (Active Attributes)</h3>
+                    
+                    <ul id="attributes-list" class="space-y-3 font-mono text-sm text-emerald-300">
+                        <!-- Dynamic Content -->
+                        <li>[GLOBAL] PA_COLOR: رنگ</li>
+                        <li>[GLOBAL] PA_SIZE: سایز طوقه</li>
+                        <li>[GLOBAL] PA_BODY_MATERIAL: جنس بدنه</li>
+                        <li>[GLOBAL] PA_BRAKE_TYPE: نوع ترمز</li>
+                        <li class="text-slate-500 line-through decoration-slate-500 decoration-2">[DISABLED] PA_GEAR_COUNT</li>
+                        <li class="text-slate-500 line-through decoration-slate-500 decoration-2">[DISABLED] PA_DERAILLEUR</li>
+                        <li class="text-slate-500 line-through decoration-slate-500 decoration-2">[DISABLED] PA_SHIFTER</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Connectivity & Performance (Based on final_bypass_fixed.py) -->
+        <section id="connectivity">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- Connectivity Status -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <h3 class="font-bold text-lg text-slate-800 mb-6">وضعیت شبکه و پایداری (Network Health)</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-3 h-3 bg-emerald-500 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.5)]"></div>
+                                <span class="font-bold text-slate-700">Python Core</span>
+                            </div>
+                            <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded">Active</span>
+                        </div>
+
+                        <!-- DNS Visual -->
+                        <div class="relative pl-4 border-r-2 border-dashed border-slate-200 mr-1.5">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-3 h-3 bg-emerald-500 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.5)]"></div>
+                                    <span class="font-bold text-slate-700">DNS Resolver</span>
+                                </div>
+                                <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">Anti-Sanction</span>
+                            </div>
+                            <p class="text-xs text-slate-500 mb-4">عبور از تحریم ۴۰۳ گوگل با استفاده از DNS اختصاصی بدون نیاز به فیلترشکن.</p>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-3 h-3 bg-emerald-500 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.5)]"></div>
+                                <span class="font-bold text-slate-700">Google Gemini API</span>
+                            </div>
+                            <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded">v2.5 Connected</span>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-3 h-3 bg-emerald-500 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.5)]"></div>
+                                <span class="font-bold text-slate-700">WooCommerce REST API</span>
+                            </div>
+                            <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded">Read/Write</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Chart -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">صرفه‌جویی در زمان (دقیقه به ازای هر محصول)</h3>
+                    <p class="text-sm text-slate-500 mb-6">مقایسه زمان ورود دستی اطلاعات در برابر سیستم هوشمند Vahidi-AI.</p>
+                    
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-slate-500 text-sm">طراحی و مهندسی شده برای <span class="font-bold text-brand-600">دوچرخه وحیدی (مشهد)</span></p>
+            <p class="text-slate-400 text-xs mt-2">© ۲۰۲۶ تمامی حقوق الگوریتم محفوظ است.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- 1. Workflow Interactive Details ---
+        const stepDetails = {
+            1: {
+                title: "ورودی‌های مغازه (Input Layer)",
+                desc: "شامل عکس‌های گرفته شده با موبایل، فایل اکسل (قیمت و موجودی دقیق) و فایل صوتی (توضیحات شفاهی شما). سیستم به طور خودکار این فایل‌ها را از پوشه میخواند."
+            },
+            2: {
+                title: "پردازش هوشمند (AI Engine)",
+                desc: "ارسال همزمان عکس و صدا به مدل Gemini 2.5 Flash. تبدیل گفتار به متن، تشخیص مدل دوچرخه از روی عکس و بررسی تناقضات احتمالی."
+            },
+            3: {
+                title: "منطق محصول (Business Logic)",
+                desc: "تصمیم‌گیری بر اساس داده‌ها: آیا محصول ساده است یا دنده‌ای؟ اگر دنده‌ای باشد، ویژگی‌های تخصصی مثل شانژمان فعال می‌شوند. تطبیق رنگ‌ها با استانداردهای سایت."
+            },
+            4: {
+                title: "سئو و اسکیما (SEO Engineering)",
+                desc: "تولید توضیحات متا (Meta Description)، تگ‌های Alt فارسی برای تصاویر، و کدهای JSON-LD برای نمایش ستاره‌دار در گوگل (Schema Pro)."
+            },
+            5: {
+                title: "تزریق به ووکامرس (Deployment)",
+                desc: "ارسال نهایی داده‌ها از طریق REST API. ساخت محصول متغیر یا ساده، آپلود تصاویر بهینه‌شده (WebP) و ذخیره به صورت پیش‌نویس."
+            }
+        };
+
+        function showStepDetail(stepId) {
+            const titleEl = document.getElementById('detail-title');
+            const descEl = document.getElementById('detail-desc');
+            const box = document.getElementById('step-detail-box');
+
+            // Simple animation effect
+            box.style.opacity = '0.5';
+            setTimeout(() => {
+                titleEl.textContent = stepDetails[stepId].title;
+                descEl.textContent = stepDetails[stepId].desc;
+                box.style.opacity = '1';
+            }, 200);
+        }
+
+        // --- 2. Logic Toggle (Simple vs Gear) ---
+        function setLogic(type) {
+            const btnSimple = document.getElementById('btn-simple');
+            const btnGear = document.getElementById('btn-gear');
+            const list = document.getElementById('attributes-list');
+            const explanation = document.getElementById('logic-explanation');
+
+            if (type === 'simple') {
+                // Style updates
+                btnSimple.className = "flex-1 py-3 rounded-lg text-sm font-bold transition-all bg-white text-brand-600 shadow-md";
+                btnGear.className = "flex-1 py-3 rounded-lg text-sm font-bold text-slate-500 hover:text-slate-700 transition-all";
+                
+                // Content update
+                explanation.innerHTML = "در این حالت، سیستم تمام فیلدهای مربوط به دنده، شانژمان و طبق‌عوض‌کن را نادیده می‌گیرد و فقط روی <span class='font-bold text-brand-600'>ایمنی و بدنه</span> تمرکز می‌کند.";
+                
+                list.innerHTML = `
+                    <li>[GLOBAL] PA_COLOR: رنگ</li>
+                    <li>[GLOBAL] PA_SIZE: سایز طوقه</li>
+                    <li>[GLOBAL] PA_BODY_MATERIAL: جنس بدنه</li>
+                    <li>[GLOBAL] PA_BRAKE_TYPE: نوع ترمز</li>
+                    <li>[GLOBAL] PA_ACCESSORIES: لوازم جانبی (سبد/کمکی)</li>
+                    <li class="text-slate-500 line-through decoration-slate-500 decoration-2 opacity-50">[DISABLED] PA_GEAR_COUNT</li>
+                    <li class="text-slate-500 line-through decoration-slate-500 decoration-2 opacity-50">[DISABLED] PA_DERAILLEUR</li>
+                    <li class="text-slate-500 line-through decoration-slate-500 decoration-2 opacity-50">[DISABLED] PA_SHIFTER</li>
+                `;
+            } else {
+                // Style updates
+                btnGear.className = "flex-1 py-3 rounded-lg text-sm font-bold transition-all bg-white text-brand-600 shadow-md";
+                btnSimple.className = "flex-1 py-3 rounded-lg text-sm font-bold text-slate-500 hover:text-slate-700 transition-all";
+
+                // Content update
+                explanation.innerHTML = "در این حالت، سیستم وارد فاز حرفه‌ای می‌شود و تمام قطعات سیستم انتقال قدرت (شانژمان، طبق، دسته دنده) را با دقت شناسایی و پر می‌کند.";
+
+                list.innerHTML = `
+                    <li>[GLOBAL] PA_COLOR: رنگ</li>
+                    <li>[GLOBAL] PA_SIZE: سایز طوقه</li>
+                    <li>[GLOBAL] PA_BODY_MATERIAL: جنس بدنه</li>
+                    <li>[GLOBAL] PA_BRAKE_TYPE: نوع ترمز</li>
+                    <li class="text-emerald-400 font-bold animate-pulse">✓ PA_GEAR_COUNT: تعداد دنده</li>
+                    <li class="text-emerald-400 font-bold animate-pulse">✓ PA_DERAILLEUR: شانژمان</li>
+                    <li class="text-emerald-400 font-bold animate-pulse">✓ PA_SHIFTER: دسته دنده</li>
+                    <li class="text-emerald-400 font-bold animate-pulse">✓ PA_CRANKSET: طبق قامه</li>
+                `;
+            }
+        }
+
+        // --- 3. Chart.js Implementation ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['ورود دستی', 'ورود با Vahidi-AI'],
+                    datasets: [{
+                        label: 'زمان مصرف شده (دقیقه)',
+                        data: [30, 3], // Data from report: 30 mins vs 3 mins
+                        backgroundColor: [
+                            'rgba(203, 213, 225, 0.8)', // Slate-300
+                            'rgba(59, 130, 246, 0.8)'  // Blue-500
+                        ],
+                        borderColor: [
+                            'rgba(203, 213, 225, 1)',
+                            'rgba(59, 130, 246, 1)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 8,
+                        barThickness: 60
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.raw + ' دقیقه';
+                                }
+                            },
+                            bodyFont: {
+                                family: 'Vazirmatn'
+                            },
+                            titleFont: {
+                                family: 'Vazirmatn'
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#f1f5f9'
+                            },
+                            ticks: {
+                                font: {
+                                    family: 'Vazirmatn'
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                font: {
+                                    family: 'Vazirmatn',
+                                    size: 14,
+                                    weight: 'bold'
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // --- 4. Navigation ---
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+            // Close mobile menu if open
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+    </script>
+</body>
+</html>
